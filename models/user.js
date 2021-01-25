@@ -45,6 +45,12 @@ module.exports = (sequelize, DataTypes) => {
           msg: 'Password must be between 8 and 99 characters long.'
         }
       }
+    },
+    wins: {
+      type: DataTypes.INTEGER
+    },
+    losses: {
+      type: DataTypes.INTEGER
     }
   }, {
     sequelize,

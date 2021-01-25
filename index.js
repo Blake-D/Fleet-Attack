@@ -59,12 +59,18 @@ app.post('/ship', function (req, res) {
         where: {
             name: req.body.name,
             power: req.body.power,
-            role: req.body.role
+            role: req.body.role,
+            pic: req.body.pic
         }
     })
   })
 
 app.get('/profile', isLoggedIn, (req, res) => {
+    // db.user.findOne({
+    //     where: {email: currentUser.email}
+    // }).then(foundUser => {
+    //     res.render('profile', {foundUser})
+    // })
     res.render('profile')
 })
 

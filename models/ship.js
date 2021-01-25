@@ -16,7 +16,8 @@ module.exports = (sequelize, DataTypes) => {
   ship.init({
     name: DataTypes.STRING,
     power: DataTypes.INTEGER,
-    role: DataTypes.STRING
+    role: DataTypes.STRING,
+    pic: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'ship',
