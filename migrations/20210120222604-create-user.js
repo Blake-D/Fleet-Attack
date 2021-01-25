@@ -17,6 +17,12 @@ module.exports = {
       password: {
         type: Sequelize.STRING
       },
+      wins: {
+        type: Sequelize.INTEGER
+      },
+      losses: {
+        type: Sequelize.INTEGER
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
