@@ -46,6 +46,10 @@ app.get('/', (req, res) => {
     res.render('home')
 })
 
+app.get('/battle', (req, res) => {
+    res.render('battle')
+})
+
 app.get('/build', (req, res) => {
     let starwarsUrl = 'https://swgoh.gg/api/ships'
     axios.get(starwarsUrl).then(apiResponse => {
@@ -55,27 +59,50 @@ app.get('/build', (req, res) => {
 })
 
 app.post('/ship', function (req, res) {
-    db.ship.findOrCreate({
+    db.user.findOne({
         where: {
-            name: req.body.name,
-            power: req.body.power,
-            role: req.body.role,
-            pic: req.body.pic
+            id: req.user.id
+        },
+        include: [db.ship]
+    }).then(user => {
+        if(user.ships.length < 5) {
+            db.ship.findOrCreate({
+                where: {
+                    name: req.body.name,
+                    power: req.body.power,
+                    role: req.body.role,
+                    pic: req.body.pic
+                }
+            }).then(([ship, wasCreated]) => {
+                ship.addUser(user)
+            })
+            res.redirect('build')
+        } else {
+            res.redirect('battle')
         }
-    }).then(([ship, wasCreated]) => {
-        console.log('This is the new ship')
-        db.user.findOne({
-            where: {
-                id: req.user.id
-            }
-        })
-        .then(user => {
-            user.addShip(ship)
-            limit: 5
-        })
-        res.redirect('build')
     })
-  })
+})
+
+// app.post('/ship', function (req, res) {
+//     db.ship.findOrCreate({
+//         where: {
+//             name: req.body.name,
+//             power: req.body.power,
+//             role: req.body.role,
+//             pic: req.body.pic
+//         }
+//     }).then(([ship, wasCreated]) => {
+//         db.user.findOne({
+//             where: {
+//                 id: req.user.id
+//             }
+//         })
+//         .then(user => {
+//             user.addShip(ship)
+//         })
+//         res.redirect('build')
+//     })
+//   })
 
 app.get('/profile', isLoggedIn, (req, res) => {
     // console.log(req.body)
