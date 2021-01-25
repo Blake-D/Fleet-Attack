@@ -1,5 +1,7 @@
 require('dotenv').config() // configures environment variables
+const db = require('./models')
 const express = require('express')
+const axios = require('axios')
 const ejsLayouts = require('express-ejs-layouts')
 const app = express()
 const session = require('express-session')
@@ -41,8 +43,25 @@ app.use((req, res, next) => {
 app.use('/auth', require('./controllers/auth'))
 
 app.get('/', (req, res) => {
-    res.render('home')
+    let starwarsUrl = 'https://swgoh.gg/api/ships'
+    axios.get(starwarsUrl).then(apiResponse => {
+        let ships = apiResponse.data
+        res.render('home', { ships: ships })
+    })
 })
+
+app.post('/ship', function (req, res) {
+    db.ship.findOrCreate({
+        where: {
+            name: req.body.name,
+            power: req.body.power,
+            role: req.body.role
+        }
+    }).then(addedShip => {
+        console.log(addedShip)
+    //   res.redirect('/ship', { addedShip })
+    })
+  })
 
 app.get('/profile', isLoggedIn, (req, res) => {
     res.render('profile')

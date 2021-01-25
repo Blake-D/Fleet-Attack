@@ -1,1 +1,11 @@
-<h1>Welcome Home</h1>
+<h1>Star Wars: Trench Run</h1>
+
+<% ships.forEach(function(ship) { %>
+    <h2><%= ship.name %></h2>
+    <form method="POST" action="/ship">
+        <input hidden type="text" name="name" value="<%= ship.name %>">
+        <input hidden type="text" name="power" value="<%= ship.power %>">
+        <input hidden type="text" name="role" value="<%= ship.role %>">
+        <button class="btn btn-primary" type="submit">Add to fleet</button>
+    </form>
+<% }) %>
