@@ -42,11 +42,15 @@ app.use((req, res, next) => {
 // controller middleware
 app.use('/auth', require('./controllers/auth'))
 
+// app.get('/', (req, res) => {
+//     res.render('home')
+// })
+
 app.get('/', (req, res) => {
     let starwarsUrl = 'https://swgoh.gg/api/ships'
     axios.get(starwarsUrl).then(apiResponse => {
         let ships = apiResponse.data
-        res.render('home', { ships: ships })
+        res.render('build', { ships: ships })
     })
 })
 
