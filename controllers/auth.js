@@ -21,7 +21,7 @@ router.post('/signup', (req, res) => {
     .then(([user, wasCreated]) => {
         if(wasCreated) {
             passport.authenticate('local', {
-                successRedirect: 'build',
+                successRedirect: '../build',
                 successFlash: 'Account created and user logged in!'
             })(req, res)
         } else {
@@ -41,7 +41,7 @@ router.get('/login', (req, res) => {
 
 router.post('/login', passport.authenticate('local', {
     failureRedirect: '/auth/login',
-    successRedirect: '/',
+    successRedirect: '../build',
     successFlash: 'You are now logged in :)',
     failureFlash: 'Invalid email or password :('
 }))

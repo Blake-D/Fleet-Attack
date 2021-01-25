@@ -42,11 +42,11 @@ app.use((req, res, next) => {
 // controller middleware
 app.use('/auth', require('./controllers/auth'))
 
-// app.get('/', (req, res) => {
-//     res.render('home')
-// })
-
 app.get('/', (req, res) => {
+    res.render('home')
+})
+
+app.get('/build', (req, res) => {
     let starwarsUrl = 'https://swgoh.gg/api/ships'
     axios.get(starwarsUrl).then(apiResponse => {
         let ships = apiResponse.data
@@ -62,10 +62,6 @@ app.post('/ship', function (req, res) {
             role: req.body.role
         }
     })
-    // .then(addedShip => {
-    //     console.log(addedShip)
-    //     res.redirect('/ship', { addedShip })
-    // })
   })
 
 app.get('/profile', isLoggedIn, (req, res) => {
