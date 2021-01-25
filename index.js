@@ -62,10 +62,25 @@ app.post('/ship', function (req, res) {
             role: req.body.role,
             pic: req.body.pic
         }
+    }).then(ship => {
+        console.log(`This is the new ${ship}`)
+        db.user.findOne({
+            where: {
+                id: user.dataValues.id
+            }
+        })
+        .then(user => {
+            console.log(`this is the ${user}`)
+            ship.addUser(user)
+        })
+        console.log('made it!')
+        // res.render('build')
     })
   })
 
 app.get('/profile', isLoggedIn, (req, res) => {
+    // console.log(req.body)
+    // console.log(res)
     res.render('profile')
 })
 
