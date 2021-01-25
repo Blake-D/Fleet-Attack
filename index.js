@@ -66,11 +66,6 @@ app.post('/ship', function (req, res) {
   })
 
 app.get('/profile', isLoggedIn, (req, res) => {
-    // db.user.findOne({
-    //     where: {email: currentUser.email}
-    // }).then(foundUser => {
-    //     res.render('profile', {foundUser})
-    // })
     res.render('profile')
 })
 

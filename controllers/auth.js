@@ -15,7 +15,9 @@ router.post('/signup', (req, res) => {
         },
         defaults: {
             name: req.body.name,
-            password: req.body.password
+            password: req.body.password,
+            wins: 0,
+            losses: 0
         }
     })
     .then(([user, wasCreated]) => {
