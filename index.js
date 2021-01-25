@@ -62,16 +62,18 @@ app.post('/ship', function (req, res) {
             role: req.body.role,
             pic: req.body.pic
         }
-    }).then(ship => {
-        console.log(`This is the new ${ship}`)
+    }).then(([ship, wasCreated]) => {
+        console.log('This is the new ship')
+        console.log(ship[0])
         db.user.findOne({
             where: {
-                id: user.dataValues.id
+                id: req.user.id
             }
         })
         .then(user => {
-            console.log(`this is the ${user}`)
-            ship.addUser(user)
+            console.log('this is the user')
+            console.log(user)
+            user.addShip(ship)
         })
         console.log('made it!')
         // res.render('build')
