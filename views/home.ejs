@@ -2,6 +2,7 @@
 
 <% ships.forEach(function(ship) { %>
     <h2><%= ship.name %></h2>
+    <img src="https://swgoh.gg<%=ship.image%>">
     <form method="POST" action="/ship">
         <input hidden type="text" name="name" value="<%= ship.name %>">
         <input hidden type="text" name="power" value="<%= ship.power %>">

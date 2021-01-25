@@ -57,10 +57,11 @@ app.post('/ship', function (req, res) {
             power: req.body.power,
             role: req.body.role
         }
-    }).then(addedShip => {
-        console.log(addedShip)
-    //   res.redirect('/ship', { addedShip })
     })
+    // .then(addedShip => {
+    //     console.log(addedShip)
+    //     res.redirect('/ship', { addedShip })
+    // })
   })
 
 app.get('/profile', isLoggedIn, (req, res) => {
