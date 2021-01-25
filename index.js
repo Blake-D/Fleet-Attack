@@ -64,19 +64,16 @@ app.post('/ship', function (req, res) {
         }
     }).then(([ship, wasCreated]) => {
         console.log('This is the new ship')
-        console.log(ship[0])
         db.user.findOne({
             where: {
                 id: req.user.id
             }
         })
         .then(user => {
-            console.log('this is the user')
-            console.log(user)
             user.addShip(ship)
+            limit: 5
         })
-        console.log('made it!')
-        // res.render('build')
+        res.redirect('build')
     })
   })
 
@@ -95,3 +92,12 @@ app.listen(process.env.PORT, () => {
 })
 
 // module.exports = server
+
+// User.findAll(
+//     {
+//       where: {
+//         $Tasks$: null,
+//       },
+//       limit: 3,
+//       subQuery: false,
+//     })
