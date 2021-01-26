@@ -50,6 +50,11 @@ router.post('/login', passport.authenticate('local', {
     
 
 router.get('/logout', (req, res) => {
+    db.user_ship.destroy({
+        where: {
+            userId: req.user.id
+        }
+    })
     req.logout()
     res.redirect('/')
 })
