@@ -1,28 +1,28 @@
 var fleet = [
     {
         name: 'ship0',
-        power: 78462,
-        role: 'Attacker'
+        power: 93480,
+        role: 'Support'
     },
     {
         name: 'ship1',
-        power: 75288,
+        power: 96946,
         role: 'Support'
     }, 
     {
         name: 'ship2',
-        power: 45142,
-        role: 'Attacker'
+        power: 85170,
+        role: 'Tank'
     },
     {
         name: 'ship3',
-        power: 83759,
-        role: 'Capital Ship'
+        power: 97503,
+        role: 'Attacker'
     },
     {
         name: 'ship4',
         power: 71758,
-        role: 'Tank'
+        role: 'Attacker'
     }
 ]
 
@@ -124,5 +124,6 @@ while (fleetAlive === true && enemyAlive === true) {
         enemy[4].power = enemy[4].power - 5000
         fleet[4].power = fleet[4].power - 5000
     }
+    console.log(fleet[0].power, fleet[1].power, fleet[2].power, fleet[3].power, fleet[4].power)
     scanForWin()
 }
