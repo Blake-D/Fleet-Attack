@@ -46,8 +46,16 @@ app.get('/', (req, res) => {
     res.render('home')
 })
 
-app.get('/battle', (req, res) => {
-    res.render('battle')
+app.get('/battle/:id', (req, res) => {
+    db.user.findOne({
+        where: {
+            id: req.params.id
+        },
+        include: [db.ship]
+    }).then(foundUser => {
+        res.render('battle', {foundUser})
+    })
+    
 })
 
 app.get('/build', (req, res) => {
@@ -65,7 +73,7 @@ app.post('/ship', function (req, res) {
         },
         include: [db.ship]
     }).then(user => {
-        if(user.ships.length < 5) {
+        if(user.ships.length < 4) {
             db.ship.findOrCreate({
                 where: {
                     name: req.body.name,
@@ -75,38 +83,25 @@ app.post('/ship', function (req, res) {
                 }
             }).then(([ship, wasCreated]) => {
                 ship.addUser(user)
+                res.redirect('build')
             })
-            res.redirect('build')
         } else {
-            res.redirect('battle')
+            db.ship.findOrCreate({
+                where: {
+                    name: req.body.name,
+                    power: req.body.power,
+                    role: req.body.role,
+                    pic: req.body.pic
+                }
+            }).then(([ship, wasCreated]) => {
+                ship.addUser(user)
+                res.redirect(`/battle/${user.id}`)
+            })
         }
     })
 })
 
-// app.post('/ship', function (req, res) {
-//     db.ship.findOrCreate({
-//         where: {
-//             name: req.body.name,
-//             power: req.body.power,
-//             role: req.body.role,
-//             pic: req.body.pic
-//         }
-//     }).then(([ship, wasCreated]) => {
-//         db.user.findOne({
-//             where: {
-//                 id: req.user.id
-//             }
-//         })
-//         .then(user => {
-//             user.addShip(ship)
-//         })
-//         res.redirect('build')
-//     })
-//   })
-
 app.get('/profile', isLoggedIn, (req, res) => {
-    // console.log(req.body)
-    // console.log(res)
     res.render('profile')
 })
 
@@ -117,14 +112,3 @@ app.get('*', (req, res) => {
 app.listen(process.env.PORT, () => {
     console.log(`listening on port ${process.env.PORT}`)
 })
-
-// module.exports = server
-
-// User.findAll(
-//     {
-//       where: {
-//         $Tasks$: null,
-//       },
-//       limit: 3,
-//       subQuery: false,
-//     })
