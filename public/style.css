@@ -1,0 +1,5 @@
+body {
+    /* background-color: red; */
+    background: url('/images/background.jpg');
+    background-size: cover;
+}

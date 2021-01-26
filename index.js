@@ -14,6 +14,8 @@ app.set('view engine', 'ejs')
 // tells the app to use ejs layouts
 app.use(ejsLayouts)
 
+app.use(express.static(__dirname + '/public'))
+
 // body parser middleware (allows us to receive form data in req.body)
 app.use(express.urlencoded({extended: false}))
 
