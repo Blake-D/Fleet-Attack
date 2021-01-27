@@ -45,6 +45,11 @@ app.use((req, res, next) => {
 // controller middleware
 app.use('/auth', require('./controllers/auth'))
 
+// function themeSong() {
+//     const audio = new Audio("audio/imperial_march.mp3")
+//     audio.play()
+// }
+
 app.get('/', (req, res) => {
     res.render('home')
 })
