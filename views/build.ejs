@@ -1,8 +1,8 @@
-<h1>Assemble Your Fleet</h1>
+<h1>Imperial fleet approaching!<br><br>Select five ships to launch a counter-attack:</h1>
 
 <% ships.forEach(function(ship) { %>
-    <h2><%= ship.name %></h2>
-    <img src="https://swgoh.gg<%=ship.image%>">
+    <h4><%= ship.name %></h4>
+    <img src="https://swgoh.gg<%=ship.image%>" width="100" height="100">
     <form method="POST" action="/ship">
         <input hidden type="text" name="name" value="<%= ship.name %>">
         <input hidden type="text" name="power" value="<%= ship.power %>">
