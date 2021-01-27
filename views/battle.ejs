@@ -3,46 +3,40 @@
 <% foundUser.ships.forEach(function(ship) { %>
     <img src="<%=ship.pic%>" width="100" height="100"><br>
     <div class="shipName"><%= ship.name %></div>
-    <div class="shipPower"><%= ship.power %></div>
-    <div class="shipRole"><%= ship.role %></div>
+    <div hidden class="shipPower"><%= ship.power %></div>
+    <div class="shipRole">Class: <%= ship.role %></div><br>
 <% }) %>
 
 <script>
 let fleetName = document.getElementsByClassName('shipName')
 let fleetPower = document.getElementsByClassName('shipPower')
 let fleetRole = document.getElementsByClassName('shipRole')
-
-var ship0 = {
+let ship0 = {
     name: fleetName[0].textContent,
     power: fleetPower[0].textContent,
     role: fleetRole[0].textContent
 }
-
-var ship1 = {
+let ship1 = {
     name: fleetName[1].textContent,
     power: fleetPower[1].textContent,
     role: fleetRole[1].textContent
 }
-
-var ship2 = {
+let ship2 = {
     name: fleetName[2].textContent,
     power: fleetPower[2].textContent,
     role: fleetRole[2].textContent
 }
-
-var ship3 = {
+let ship3 = {
     name: fleetName[3].textContent,
     power: fleetPower[3].textContent,
     role: fleetRole[3].textContent
 }
-
-var ship4 = {
+let ship4 = {
     name: fleetName[4].textContent,
     power: fleetPower[4].textContent,
     role: fleetRole[4].textContent
 }
-
-var enemy = [
+let enemy = [
     {
         name: 'ship0',
         power: 89801,
@@ -69,11 +63,8 @@ var enemy = [
         role: 'Attacker'
     }
 ]
-
 let fleetAlive = true
-
 let enemyAlive = true
-
 function scanForWin() {
     if (ship0.power > 0 || ship1.power > 0 || ship2.power > 0 || ship3.power > 0 || ship4.power > 0) {
         fleetAlive = true
@@ -88,7 +79,6 @@ function scanForWin() {
         console.log('You Win!')
     }
 }
-
 while (fleetAlive === true && enemyAlive === true) {
     if (ship0.role === 'Capital Ship') {
         enemy[0].power = enemy[0].power - 10000
@@ -143,6 +133,4 @@ while (fleetAlive === true && enemyAlive === true) {
     console.log(ship0.power, ship1.power, ship2.power, ship3.power, ship4.power)
     scanForWin()
 }
-
 </script>
-
