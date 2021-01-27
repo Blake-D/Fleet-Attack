@@ -84,7 +84,7 @@ function scanForWin() {
     if (fleetAlive === true && enemyAlive === false) {
         document.getElementById('headline').innerText = 'Your fleet is victorious!'
     } else if (fleetAlive === false && enemyAlive === true) {
-        document.getElementById('headline').innerText = 'Your fleet has been obliterated.!'
+        document.getElementById('headline').innerText = 'Your fleet has been obliterated!'
     } else if (fleetAlive === false && enemyAlive === false) {
         document.getElementById('headline').innerText = 'Both fleets have been obliterated. There are no survivors.'
     }
@@ -141,8 +141,6 @@ function battle() {
             enemy[4].power = enemy[4].power - 5000
             ship4.power = ship4.power - 5000
         }
-        console.log(ship0.power, ship1.power, ship2.power, ship3.power, ship4.power)
-        // sleep(2000).then(() => {scanForWin()})
         scanForWin()
     }
 }
