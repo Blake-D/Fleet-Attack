@@ -70,13 +70,18 @@ function scanForWin() {
         fleetAlive = true
     } else {
         fleetAlive = false
-        console.log('You Lose!')
     }
     if (enemy[0].power > 0 || enemy[1].power > 0 || enemy[2].power > 0 || enemy[3].power > 0 || enemy[4].power > 0) {
         enemyAlive = true
     } else {
         enemyAlive = false
+    }
+    if (fleetAlive === true && enemyAlive === false) {
         console.log('You Win!')
+    } else if (fleetAlive === false && enemyAlive === true) {
+        console.log('You Lose')
+    } else if (fleetAlive === false && enemyAlive === false) {
+        console.log('Both fleets have been obliterated...')
     }
 }
 while (fleetAlive === true && enemyAlive === true) {
