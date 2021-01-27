@@ -81,7 +81,7 @@ app.post('/ship', function (req, res) {
         },
         include: [db.ship]
     }).then(user => {
-        if(user.ships.length < 4) {
+        if(user.ships.length <= 4) {
             db.ship.findOrCreate({
                 where: {
                     name: req.body.name,

@@ -71,14 +71,12 @@ function scanForWin() {
     } else {
         fleetAlive = false
         console.log('You Lose!')
-        foundUser.losses = foundUser.losses + 1
     }
     if (enemy[0].power > 0 || enemy[1].power > 0 || enemy[2].power > 0 || enemy[3].power > 0 || enemy[4].power > 0) {
         enemyAlive = true
     } else {
         enemyAlive = false
         console.log('You Win!')
-        foundUser.wins = foundUser.wins + 1
     }
 }
 while (fleetAlive === true && enemyAlive === true) {
