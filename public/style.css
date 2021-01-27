@@ -3,4 +3,6 @@ body {
     background-size: cover;
     color: yellow;
     background-repeat: no-repeat;
+    font-family: 'News Gothic';
+    border-color: yellow;
 }
