@@ -105,6 +105,11 @@ app.post('/ship', function (req, res) {
 })
 
 app.get('/profile', isLoggedIn, (req, res) => {
+    db.user_ship.destroy({
+        where: {
+            userId: req.user.id
+        }
+    })
     res.render('profile')
 })
 

@@ -3,13 +3,16 @@
 <button type="button" id="button">Engage!</button><br><br>
 
 <% foundUser.ships.forEach(function(ship) { %>
-    <img src="<%=ship.pic%>" width="100" height="100"><br>
+    <img src="<%=ship.pic%>" width="50" height="50"><br>
     <div class="shipName"><%= ship.name %></div>
     <div hidden class="shipPower"><%= ship.power %></div>
     <div class="shipRole">Class: <%= ship.role %></div><br>
 <% }) %>
 
 <script>
+
+// const db = require('../models')
+
 // function battleSounds() {
 //     const audio = new Audio("./audio/battle_sounds.mp3")
 //     audio.play()
@@ -26,6 +29,7 @@ document.getElementById('button').addEventListener('click', () => {
     }
 })
 let gameOver = false
+let user_id = document.getElementsByClassName('user_id')
 let fleetName = document.getElementsByClassName('shipName')
 let fleetPower = document.getElementsByClassName('shipPower')
 let fleetRole = document.getElementsByClassName('shipRole')
@@ -97,12 +101,27 @@ function scanForWin() {
     if (fleetAlive === true && enemyAlive === false) {
         document.getElementById('headline').innerText = 'Your fleet is victorious!'
         gameOver = true
+        // db.user_ship.destroy({
+        //     where: {
+        //         userId: ?
+        //     }
+        // })
     } else if (fleetAlive === false && enemyAlive === true) {
         document.getElementById('headline').innerText = 'Your fleet has been obliterated!'
         gameOver = true
+        // db.user_ship.destroy({
+        //     where: {
+        //         userId: ?
+        //     }
+        // })
     } else if (fleetAlive === false && enemyAlive === false) {
         document.getElementById('headline').innerText = 'Both fleets have been obliterated. There are no survivors.'
         gameOver = true
+        // db.user_ship.destroy({
+        //     where: {
+        //         userId: ?
+        //     }
+        // })
     }
 }
 function battle() {
