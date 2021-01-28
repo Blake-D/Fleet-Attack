@@ -16,11 +16,10 @@ function sleep(ms) {
 document.getElementById('button').addEventListener('click', () => {
     if (gameOver === false) {
         document.getElementById('headline').innerText = 'Engaging!'
+        document.getElementById('button').innerText = 'May the force be with you!'
         sleep(3000).then(() => {battle()})
     }
 })
-// sleep(3000).then(() => {document.getElementById('headline').innerText = 'Engaging!'})
-// sleep(6000).then(() => {battle()})
 let gameOver = false
 let fleetName = document.getElementsByClassName('shipName')
 let fleetPower = document.getElementsByClassName('shipPower')
