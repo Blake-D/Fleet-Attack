@@ -1,3 +1,8 @@
 <h1><%= currentUser.name %>'s combat record:</h1>
 <h3>Wins: <%= currentUser.wins %></h3>
 <h3>Losses: <%= currentUser.losses %></h3>
+<h3>Draws: <%= currentUser.draws %></h3>
+<form method="POST" action="/delete">
+    <input hidden type="text" name="id" value="<%= currentUser.id %>">
+    <button class="btn btn-primary" type="submit">Delete Account</button>
+</form>

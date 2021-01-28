@@ -17,7 +17,8 @@ router.post('/signup', (req, res) => {
             name: req.body.name,
             password: req.body.password,
             wins: 0,
-            losses: 0
+            losses: 0,
+            draws: 0
         }
     })
     .then(([user, wasCreated]) => {
@@ -58,5 +59,13 @@ router.get('/logout', (req, res) => {
     req.logout()
     res.redirect('/')
 })
+
+// router.delete('/delete/:id', (req, res) => {
+//     db.user.destroy({
+//         where: {
+//             id: req.params.id
+//         }
+//     })
+// })
 
 module.exports = router

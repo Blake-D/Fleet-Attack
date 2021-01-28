@@ -52,6 +52,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     losses: {
       type: DataTypes.INTEGER
+    },
+    draws: {
+      type: DataTypes.INTEGER
     }
   }, {
     sequelize,
