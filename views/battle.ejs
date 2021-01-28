@@ -3,10 +3,10 @@
 <button type="button" id="button">Engage!</button><br><br>
 
 <% foundUser.ships.forEach(function(ship) { %>
-    <img src="<%=ship.pic%>" width="50" height="50"><br>
-    <div class="shipName"><%= ship.name %></div>
+    <img src="<%=ship.pic%>" width="70" height="70"><br>
+    <div hidden class="shipName"><%= ship.name %></div>
     <div hidden class="shipPower"><%= ship.power %></div>
-    <div class="shipRole">Class: <%= ship.role %></div><br>
+    <div hidden class="shipRole">Class: <%= ship.role %></div><br>
 <% }) %>
 
 <script>
@@ -128,17 +128,20 @@ function scanForWin() {
         enemyAlive = false
     }
     if (fleetAlive === true && enemyAlive === false) {
-        document.getElementById('headline').innerText = 'Your fleet is victorious! Click "Assemble Fleet" to play again.'
+        document.getElementById('headline').innerText = 'Your fleet is victorious! \n Assemble a new fleet to play again.'
+        document.getElementById('button').innerText = 'Yay!'
         gameOver = true
         battleWin()
         sleep(3000).then(() => {battleEnd()})
     } else if (fleetAlive === false && enemyAlive === true) {
-        document.getElementById('headline').innerText = 'Your fleet has been obliterated! Click "Assemble Fleet" to try again.'
+        document.getElementById('headline').innerText = 'Your fleet has been obliterated! \n Assemble a new fleet to try again.'
+        document.getElementById('button').innerText = 'Booo'
         gameOver = true
         battleLoss()
         sleep(3000).then(() => {battleEnd()})
     } else if (fleetAlive === false && enemyAlive === false) {
-        document.getElementById('headline').innerText = 'Both fleets have been obliterated. There are no survivors. Click "Assemble Fleet" to try again.'
+        document.getElementById('headline').innerText = 'Both fleets have been obliterated. There were no survivors. \n Assemble a new fleet" to try again.'
+        document.getElementById('button').innerText = 'Meh'
         gameOver = true
         battleDraw()
         sleep(3000).then(() => {battleEnd()})
