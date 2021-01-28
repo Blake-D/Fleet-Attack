@@ -10,54 +10,13 @@
 <% }) %>
 
 <script>
-function battleEnd() {
-    fetch('/profile')
-}
-function battleWin() {
-    fetch('/auth/update/win', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-        }
-    })
-}
-function battleLoss() {
-    fetch('/auth/update/loss', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-        }
-    })
-}
-function battleDraw() {
-    fetch('/auth/update/draw', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-        }
-    })
-}
-
 // function battleSounds() {
 //     const audio = new Audio("./audio/battle_sounds.mp3")
 //     audio.play()
 // }
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms))
-}
-document.getElementById('button').addEventListener('click', () => {
-    if (gameOver === false) {
-        // battleSounds()
-        document.getElementById('headline').innerText = 'Engaging!'
-        document.getElementById('button').innerText = 'May the force be with you!'
-        sleep(3000).then(() => {battle()})
-    }
-})
 let gameOver = false
+let fleetAlive = true
+let enemyAlive = true
 let user_id = document.getElementsByClassName('user_id')
 let fleetName = document.getElementsByClassName('shipName')
 let fleetPower = document.getElementsByClassName('shipPower')
@@ -114,8 +73,47 @@ let enemy = [
         role: 'Attacker'
     }
 ]
-let fleetAlive = true
-let enemyAlive = true
+document.getElementById('button').addEventListener('click', () => {
+    if (gameOver === false) {
+        // battleSounds()
+        document.getElementById('headline').innerText = 'Engaging!'
+        document.getElementById('button').innerText = 'May the force be with you!'
+        sleep(3000).then(() => {battle()})
+    }
+})
+function battleEnd() {
+    fetch('/profile')
+}
+function battleWin() {
+    fetch('/auth/update/win', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+        }
+    })
+}
+function battleLoss() {
+    fetch('/auth/update/loss', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+        }
+    })
+}
+function battleDraw() {
+    fetch('/auth/update/draw', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+        }
+    })
+}
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms))
+}
 function scanForWin() {
     if (ship0.power > 0 || ship1.power > 0 || ship2.power > 0 || ship3.power > 0 || ship4.power > 0) {
         fleetAlive = true
