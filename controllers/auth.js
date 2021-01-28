@@ -60,12 +60,13 @@ router.get('/logout', (req, res) => {
     res.redirect('/')
 })
 
-// router.delete('/delete/:id', (req, res) => {
-//     db.user.destroy({
-//         where: {
-//             id: req.params.id
-//         }
-//     })
-// })
+router.delete('/delete/:id', (req, res) => {
+    db.user.destroy({
+        where: {
+            id: req.params.id
+        }
+    })
+    res.redirect('/')
+})
 
 module.exports = router

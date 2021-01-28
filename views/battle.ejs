@@ -106,20 +106,48 @@ function scanForWin() {
         //         userId: ?
         //     }
         // })
+
+        // db.user.update({
+        //     wins: ++
+        // }, {
+        //     where: {
+        //         id: ?
+        //     }
+        // })
+
     } else if (fleetAlive === false && enemyAlive === true) {
         document.getElementById('headline').innerText = 'Your fleet has been obliterated!'
         gameOver = true
+
         // db.user_ship.destroy({
         //     where: {
         //         userId: ?
         //     }
         // })
+
+        // db.user.update({
+        //     losses: ++
+        // }, {
+        //     where: {
+        //         id: ?
+        //     }
+        // })
+
     } else if (fleetAlive === false && enemyAlive === false) {
         document.getElementById('headline').innerText = 'Both fleets have been obliterated. There are no survivors.'
         gameOver = true
+        
         // db.user_ship.destroy({
         //     where: {
         //         userId: ?
+        //     }
+        // })
+
+        // db.user.update({
+        //     draws: ++
+        // }, {
+        //     where: {
+        //         id: ?
         //     }
         // })
     }

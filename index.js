@@ -8,6 +8,7 @@ const session = require('express-session')
 const passport = require('./config/ppConfig.js')
 const flash = require('connect-flash')
 const isLoggedIn = require('./middleware/isLoggedIn.js')
+const methodOverride = require('method-override')
 
 // set the view engine to ejs
 app.set('view engine', 'ejs')
@@ -19,6 +20,9 @@ app.use(express.static(__dirname + '/public'))
 
 // body parser middleware (allows us to receive form data in req.body)
 app.use(express.urlencoded({extended: false}))
+
+// middleware to delete user account
+app.use(methodOverride('_method'))
 
 // session middleware
 app.use(session({
