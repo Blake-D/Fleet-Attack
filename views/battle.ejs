@@ -1,4 +1,6 @@
-<h1 id="headline">Preparing to engage</h1>
+<h1 id="headline">Ready to engage?</h1>
+
+<button type="button" id="button">Engage!</button><br><br>
 
 <% foundUser.ships.forEach(function(ship) { %>
     <img src="<%=ship.pic%>" width="100" height="100"><br>
@@ -11,8 +13,15 @@
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms))
 }
-sleep(3000).then(() => {document.getElementById('headline').innerText = 'Engaging!'})
-sleep(6000).then(() => {battle()})
+document.getElementById('button').addEventListener('click', () => {
+    if (gameOver === false) {
+        document.getElementById('headline').innerText = 'Engaging!'
+        sleep(3000).then(() => {battle()})
+    }
+})
+// sleep(3000).then(() => {document.getElementById('headline').innerText = 'Engaging!'})
+// sleep(6000).then(() => {battle()})
+let gameOver = false
 let fleetName = document.getElementsByClassName('shipName')
 let fleetPower = document.getElementsByClassName('shipPower')
 let fleetRole = document.getElementsByClassName('shipRole')
@@ -83,10 +92,13 @@ function scanForWin() {
     }
     if (fleetAlive === true && enemyAlive === false) {
         document.getElementById('headline').innerText = 'Your fleet is victorious!'
+        gameOver = true
     } else if (fleetAlive === false && enemyAlive === true) {
         document.getElementById('headline').innerText = 'Your fleet has been obliterated!'
+        gameOver = true
     } else if (fleetAlive === false && enemyAlive === false) {
         document.getElementById('headline').innerText = 'Both fleets have been obliterated. There are no survivors.'
+        gameOver = true
     }
 }
 function battle() {
