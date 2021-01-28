@@ -2,13 +2,14 @@
 
 <% ships.forEach(function(ship) { %>
     <h3><%= ship.name %></h3>
-    <h4>Class: <%= ship.role %></h4>
     <img src="https://swgoh.gg<%=ship.image%>" width="200" height="200">
+    <h4>Class: <%= ship.role %></h4>
+    <h5>Hit Points: <%= ship.power %></h4>
     <form method="POST" action="/ship">
         <input hidden type="text" name="name" value="<%= ship.name %>">
         <input hidden type="text" name="power" value="<%= ship.power %>">
         <input hidden type="text" name="role" value="<%= ship.role %>">
         <input hidden type="text" name="pic" value="https://swgoh.gg<%=ship.image%>">
-        <button class="btn btn-primary" type="submit">Add to fleet</button>
+        <button class="btn btn-primary" type="submit">Add to fleet</button><br><br>
     </form>
 <% }) %>
