@@ -69,4 +69,8 @@ router.delete('/delete/:id', (req, res) => {
     res.redirect('/')
 })
 
+// router.get('/update', (req,res) => {
+//     res.render('auth/update')
+// })
+
 module.exports = router

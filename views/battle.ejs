@@ -10,13 +10,15 @@
 <% }) %>
 
 <script>
-
-// const db = require('../models')
+function battleEnd() {
+    fetch('/profile')
+}
 
 // function battleSounds() {
 //     const audio = new Audio("./audio/battle_sounds.mp3")
 //     audio.play()
 // }
+
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms))
 }
@@ -26,6 +28,9 @@ document.getElementById('button').addEventListener('click', () => {
         document.getElementById('headline').innerText = 'Engaging!'
         document.getElementById('button').innerText = 'May the force be with you!'
         sleep(3000).then(() => {battle()})
+    }
+    if (gameOver === true) {
+        fetch('/build')
     }
 })
 let gameOver = false
@@ -101,11 +106,8 @@ function scanForWin() {
     if (fleetAlive === true && enemyAlive === false) {
         document.getElementById('headline').innerText = 'Your fleet is victorious!'
         gameOver = true
-        // db.user_ship.destroy({
-        //     where: {
-        //         userId: ?
-        //     }
-        // })
+        document.getElementById('button').innerText = 'Try again?'
+        sleep(3000).then(() => {battleEnd()})
 
         // db.user.update({
         //     wins: ++
@@ -118,13 +120,9 @@ function scanForWin() {
     } else if (fleetAlive === false && enemyAlive === true) {
         document.getElementById('headline').innerText = 'Your fleet has been obliterated!'
         gameOver = true
-
-        // db.user_ship.destroy({
-        //     where: {
-        //         userId: ?
-        //     }
-        // })
-
+        document.getElementById('button').innerText = 'Try again?'
+        sleep(3000).then(() => {battleEnd()})
+        
         // db.user.update({
         //     losses: ++
         // }, {
@@ -136,13 +134,9 @@ function scanForWin() {
     } else if (fleetAlive === false && enemyAlive === false) {
         document.getElementById('headline').innerText = 'Both fleets have been obliterated. There are no survivors.'
         gameOver = true
+        document.getElementById('button').innerText = 'Try again?'
+        sleep(3000).then(() => {battleEnd()})
         
-        // db.user_ship.destroy({
-        //     where: {
-        //         userId: ?
-        //     }
-        // })
-
         // db.user.update({
         //     draws: ++
         // }, {
