@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const db = require('../models')
 const passport = require('../config/ppConfig.js')
+const user = require('../models/user')
 
 router.get('/signup', (req, res) => {
     res.render('auth/signup')
@@ -49,7 +50,6 @@ router.post('/login', passport.authenticate('local', {
     failureFlash: 'Invalid email or password :('
 }))
     
-
 router.get('/logout', (req, res) => {
     db.user_ship.destroy({
         where: {
@@ -69,8 +69,43 @@ router.delete('/delete/:id', (req, res) => {
     res.redirect('/')
 })
 
-// router.get('/update', (req,res) => {
-//     res.render('auth/update')
-// })
+router.post('/update/win', (req,res) => {
+    db.user.findOne({
+        where: {
+            id: req.user.id
+        }
+    }).then(user => {
+        user.wins = user.wins + 1
+        user.save().then(()=>{
+            res.send('Star Wars!!!')
+        })
+    })
+})
+
+router.post('/update/loss', (req,res) => {
+    db.user.findOne({
+        where: {
+            id: req.user.id
+        }
+    }).then(user => {
+        user.losses = user.losses + 1
+        user.save().then(()=>{
+            res.send('Star Wars!!!')
+        })
+    })
+})
+
+router.post('/update/draw', (req,res) => {
+    db.user.findOne({
+        where: {
+            id: req.user.id
+        }
+    }).then(user => {
+        user.draws = user.draws + 1
+        user.save().then(()=>{
+            res.send('Star Wars!!!')
+        })
+    })
+})
 
 module.exports = router
