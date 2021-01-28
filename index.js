@@ -49,7 +49,7 @@ app.get('/', (req, res) => {
     res.render('home')
 })
 
-app.get('/battle/:id', (req, res) => {
+app.get('/battle/:id', isLoggedIn, (req, res) => {
     db.user.findOne({
         where: {
             id: req.params.id
@@ -61,7 +61,7 @@ app.get('/battle/:id', (req, res) => {
     
 })
 
-app.get('/build', (req, res) => {
+app.get('/build', isLoggedIn, (req, res) => {
     let starwarsUrl = 'https://swgoh.gg/api/ships'
     axios.get(starwarsUrl).then(apiResponse => {
         let ships = apiResponse.data
