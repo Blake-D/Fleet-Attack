@@ -26,7 +26,7 @@ router.post('/signup', (req, res) => {
         if(wasCreated) {
             passport.authenticate('local', {
                 successRedirect: '../profile',
-                successFlash: 'Account created and user logged in!'
+                successFlash: ''
             })(req, res)
         } else {
             req.flash('error', 'An account associated with that email address already exists. Did you mean to log in?')
@@ -46,7 +46,7 @@ router.get('/login', (req, res) => {
 router.post('/login', passport.authenticate('local', {
     failureRedirect: '/auth/login',
     successRedirect: '../profile',
-    successFlash: 'You are now logged in :)',
+    successFlash: '',
     failureFlash: 'Invalid email or password :('
 }))
     

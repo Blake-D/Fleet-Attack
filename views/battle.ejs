@@ -138,7 +138,7 @@ function scanForWin() {
         battleLoss()
         sleep(3000).then(() => {battleEnd()})
     } else if (fleetAlive === false && enemyAlive === false) {
-        document.getElementById('headline').innerText = 'Both fleets have been obliterated. There were no survivors. \n Assemble a new fleet" to try again.'
+        document.getElementById('headline').innerText = 'Both fleets have been obliterated. There were no survivors. \n Assemble a new fleet to try again.'
         document.getElementById('button').innerText = 'Meh'
         gameOver = true
         battleDraw()
