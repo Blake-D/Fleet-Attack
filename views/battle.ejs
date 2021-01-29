@@ -10,137 +10,143 @@
 <% }) %>
 
 <script>
-let gameOver = false
-let fleetAlive = true
-let enemyAlive = true
-let user_id = document.getElementsByClassName('user_id')
-let fleetName = document.getElementsByClassName('shipName')
-let fleetPower = document.getElementsByClassName('shipPower')
-let fleetRole = document.getElementsByClassName('shipRole')
-let ship0 = {
-    name: fleetName[0].textContent,
-    power: fleetPower[0].textContent,
-    role: fleetRole[0].textContent
-}
-let ship1 = {
-    name: fleetName[1].textContent,
-    power: fleetPower[1].textContent,
-    role: fleetRole[1].textContent
-}
-let ship2 = {
-    name: fleetName[2].textContent,
-    power: fleetPower[2].textContent,
-    role: fleetRole[2].textContent
-}
-let ship3 = {
-    name: fleetName[3].textContent,
-    power: fleetPower[3].textContent,
-    role: fleetRole[3].textContent
-}
-let ship4 = {
-    name: fleetName[4].textContent,
-    power: fleetPower[4].textContent,
-    role: fleetRole[4].textContent
-}
-let enemy = [
-    {
-        name: 'ship0',
-        power: 89801,
-        role: 'Attacker'
-    },
-    {
-        name: 'ship1',
-        power: 76271,
-        role: 'Tank'
-    }, 
-    {
-        name: 'ship2',
-        power: 81177,
-        role: 'Capital Ship'
-    },
-    {
-        name: 'ship3',
-        power: 76271,
-        role: 'Tank'
-    },
-    {
-        name: 'ship4',
-        power: 89801,
-        role: 'Attacker'
+    // variables for battle and scanForWin functions
+    let gameOver = false
+    let fleetAlive = true
+    let enemyAlive = true
+    // stores info from the forEach loop into arrays referenced in the player ship objects
+    let user_id = document.getElementsByClassName('user_id')
+    let fleetName = document.getElementsByClassName('shipName')
+    let fleetPower = document.getElementsByClassName('shipPower')
+    let fleetRole = document.getElementsByClassName('shipRole')
+    // player ship objects
+    let ship0 = {
+        name: fleetName[0].textContent,
+        power: fleetPower[0].textContent,
+        role: fleetRole[0].textContent
     }
-]
-document.getElementById('button').addEventListener('click', () => {
-    if (gameOver === false) {
-        document.getElementById('headline').innerText = 'Engaging!'
-        document.getElementById('button').innerText = 'May the force be with you!'
-        sleep(3000).then(() => {battle()})
+    let ship1 = {
+        name: fleetName[1].textContent,
+        power: fleetPower[1].textContent,
+        role: fleetRole[1].textContent
     }
-})
-function battleEnd() {
-    fetch('/profile')
-}
-function battleWin() {
-    fetch('/auth/update/win', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
+    let ship2 = {
+        name: fleetName[2].textContent,
+        power: fleetPower[2].textContent,
+        role: fleetRole[2].textContent
+    }
+    let ship3 = {
+        name: fleetName[3].textContent,
+        power: fleetPower[3].textContent,
+        role: fleetRole[3].textContent
+    }
+    let ship4 = {
+        name: fleetName[4].textContent,
+        power: fleetPower[4].textContent,
+        role: fleetRole[4].textContent
+    }
+    // array with enemy ship objects
+    let enemy = [
+        {
+            name: 'ship0',
+            power: 89801,
+            role: 'Attacker'
+        },
+        {
+            name: 'ship1',
+            power: 76271,
+            role: 'Tank'
+        }, 
+        {
+            name: 'ship2',
+            power: 81177,
+            role: 'Capital Ship'
+        },
+        {
+            name: 'ship3',
+            power: 76271,
+            role: 'Tank'
+        },
+        {
+            name: 'ship4',
+            power: 89801,
+            role: 'Attacker'
+        }
+    ]
+    // event listener for 'engage' button
+    document.getElementById('button').addEventListener('click', () => {
+        if (gameOver === false) {
+            document.getElementById('headline').innerText = 'Engaging!'
+            document.getElementById('button').innerText = 'May the force be with you!'
+            sleep(3000).then(() => {battle()})
         }
     })
-}
-function battleLoss() {
-    fetch('/auth/update/loss', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
+    // functions
+    function battleEnd() {
+        fetch('/profile')
+    }
+    function battleWin() {
+        fetch('/auth/update/win', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+            }
+        })
+    }
+    function battleLoss() {
+        fetch('/auth/update/loss', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+            }
+        })
+    }
+    function battleDraw() {
+        fetch('/auth/update/draw', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+            }
+        })
+    }
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms))
+    }
+    function scanForWin() {
+        if (ship0.power > 0 || ship1.power > 0 || ship2.power > 0 || ship3.power > 0 || ship4.power > 0) {
+            fleetAlive = true
+        } else {
+            fleetAlive = false
         }
-    })
-}
-function battleDraw() {
-    fetch('/auth/update/draw', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        if (enemy[0].power > 0 || enemy[1].power > 0 || enemy[2].power > 0 || enemy[3].power > 0 || enemy[4].power > 0) {
+            enemyAlive = true
+        } else {
+            enemyAlive = false
         }
-    })
-}
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms))
-}
-function scanForWin() {
-    if (ship0.power > 0 || ship1.power > 0 || ship2.power > 0 || ship3.power > 0 || ship4.power > 0) {
-        fleetAlive = true
-    } else {
-        fleetAlive = false
+        if (fleetAlive === true && enemyAlive === false) {
+            document.getElementById('headline').innerText = 'Your fleet is victorious! \n Assemble a new fleet to play again.'
+            document.getElementById('button').innerText = 'Yay!'
+            gameOver = true
+            battleWin()
+            sleep(3000).then(() => {battleEnd()})
+        } else if (fleetAlive === false && enemyAlive === true) {
+            document.getElementById('headline').innerText = 'Your fleet has been obliterated! \n Assemble a new fleet to try again.'
+            document.getElementById('button').innerText = 'Booo'
+            gameOver = true
+            battleLoss()
+            sleep(3000).then(() => {battleEnd()})
+        } else if (fleetAlive === false && enemyAlive === false) {
+            document.getElementById('headline').innerText = 'Both fleets have been obliterated. There were no survivors. \n Assemble a new fleet to try again.'
+            document.getElementById('button').innerText = 'Meh'
+            gameOver = true
+            battleDraw()
+            sleep(3000).then(() => {battleEnd()})
+        }
     }
-    if (enemy[0].power > 0 || enemy[1].power > 0 || enemy[2].power > 0 || enemy[3].power > 0 || enemy[4].power > 0) {
-        enemyAlive = true
-    } else {
-        enemyAlive = false
-    }
-    if (fleetAlive === true && enemyAlive === false) {
-        document.getElementById('headline').innerText = 'Your fleet is victorious! \n Assemble a new fleet to play again.'
-        document.getElementById('button').innerText = 'Yay!'
-        gameOver = true
-        battleWin()
-        sleep(3000).then(() => {battleEnd()})
-    } else if (fleetAlive === false && enemyAlive === true) {
-        document.getElementById('headline').innerText = 'Your fleet has been obliterated! \n Assemble a new fleet to try again.'
-        document.getElementById('button').innerText = 'Booo'
-        gameOver = true
-        battleLoss()
-        sleep(3000).then(() => {battleEnd()})
-    } else if (fleetAlive === false && enemyAlive === false) {
-        document.getElementById('headline').innerText = 'Both fleets have been obliterated. There were no survivors. \n Assemble a new fleet to try again.'
-        document.getElementById('button').innerText = 'Meh'
-        gameOver = true
-        battleDraw()
-        sleep(3000).then(() => {battleEnd()})
-    }
-}
-function battle() {
+    function battle() {
     while (fleetAlive === true && enemyAlive === true) {
         if (ship0.role === 'Capital Ship') {
             enemy[0].power = enemy[0].power - 15000

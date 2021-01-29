@@ -50,10 +50,12 @@ app.use((req, res, next) => {
 // controller middleware
 app.use('/auth', require('./controllers/auth'))
 
+// home route
 app.get('/', (req, res) => {
     res.render('home')
 })
 
+// battle sequence view
 app.get('/battle/:id', isLoggedIn, (req, res) => {
     db.user.findOne({
         where: {
@@ -66,6 +68,7 @@ app.get('/battle/:id', isLoggedIn, (req, res) => {
     
 })
 
+// fleet assembly
 app.get('/build', isLoggedIn, (req, res) => {
     let starwarsUrl = 'https://swgoh.gg/api/ships'
     axios.get(starwarsUrl).then(apiResponse => {
@@ -74,6 +77,7 @@ app.get('/build', isLoggedIn, (req, res) => {
     })
 })
 
+// populates the /battle with the info from /build 
 app.post('/ship', function (req, res) {
     db.user.findOne({
         where: {
@@ -109,6 +113,7 @@ app.post('/ship', function (req, res) {
     })
 })
 
+// profile page
 app.get('/profile', isLoggedIn, (req, res) => {
     db.user_ship.destroy({
         where: {
