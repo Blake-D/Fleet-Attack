@@ -10,10 +10,6 @@
 <% }) %>
 
 <script>
-// function battleSounds() {
-//     const audio = new Audio("./audio/battle_sounds.mp3")
-//     audio.play()
-// }
 let gameOver = false
 let fleetAlive = true
 let enemyAlive = true
@@ -75,7 +71,6 @@ let enemy = [
 ]
 document.getElementById('button').addEventListener('click', () => {
     if (gameOver === false) {
-        // battleSounds()
         document.getElementById('headline').innerText = 'Engaging!'
         document.getElementById('button').innerText = 'May the force be with you!'
         sleep(3000).then(() => {battle()})

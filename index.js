@@ -9,6 +9,7 @@ const passport = require('./config/ppConfig.js')
 const flash = require('connect-flash')
 const isLoggedIn = require('./middleware/isLoggedIn.js')
 const methodOverride = require('method-override')
+const player = require('play-sound')(opts = {})
 
 // set the view engine to ejs
 app.set('view engine', 'ejs')
