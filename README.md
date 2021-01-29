@@ -3,7 +3,7 @@
 
 Star Wars: Fleet Attack is a full-stack web application that lets the user browse the stats of various ships from the Star Wars universe and pit them against an imperial fleet in combinations of five.
 
-[https://blake-d.github.io/Fleet-Attack/]
+[https://round2-deployment.herokuapp.com/]
 
 ## Technologies used:
 
