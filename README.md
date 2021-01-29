@@ -75,7 +75,7 @@ Once basic navigation was established, I whiteboarded the game logic for the bat
 
 The battle logic I wrote turned out to not be as air-tight as I had thought. It allowed for a simultaneous win and loss. I spent a good few hours trying to plug that hole, but in the end, the changes I implemented made it impossible for the game-loop to ever be satisfied. I'm still not sure where it went wrong, but in the end, I just decided that a tie was an acceptable outcome, and I updated the user model to track ties as well as wins and losses.
 
-I never figured out how to render audio in the battle sequences. I tried to do it the same way I played audio in my P1, but playing audio in an ejs file is a whole different beats, apparently. Though audio was not neccessarily one of my MVP goals, I really was not anticipating not being able to make it work, and the result is much more lackluster than I would have thought.
+I never figured out how to render audio in the battle sequences. I tried to do it the same way I played audio in my P1, but playing audio in an ejs file is a whole different beast, apparently. Though audio was not neccessarily one of my MVP goals, I really was not anticipating not being able to make it work, and the result is much more lackluster than I would have thought.
 
 My primary stretch goal would have been to let users save their favorite fleets and fight each other with them, as opposed to just facing off against the computer. But I didn't even get close to tackling that.
 
