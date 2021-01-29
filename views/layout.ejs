@@ -4,16 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@800&display=swap" rel="stylesheet">
     <title>Star Wars: Fleet Attack</title>
 </head>
 <body>
     <header>
         <nav>
             <% if (!currentUser) { %>
-                <a href="/auth/signup">Sign Up</a><br>
-                <a href="/auth/login">Log In</a>
+                <a href="/auth/signup">Sign up</a><br>
+                <a href="/auth/login">Log in</a>
             <% } else { %>
-                <a href="/auth/logout">Log Out</a><br>
+                <a href="/auth/logout">Log out</a><br>
                 <a href="/profile">Profile</a><br>
                 <a href="/build">Assemble Fleet</a>
             <% } %>
